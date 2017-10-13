@@ -13,21 +13,28 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-package com.robbyp.refdatacache.domain;
+// limitations under the License
+package com.robbyp.refdatacache.service;
 
-import lombok.Data;
+import com.hazelcast.query.Predicate;
+import com.hazelcast.query.Predicates;
+import org.springframework.util.Assert;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-@Data
-public class Instrument implements Serializable {
-  private String id;
-  private String isin;
-  private String cusip;
-  private String sedol;
-  private String issuer;
-  private String issue;
-  private String countryOfIssue;
-  private String countryOfIncorporation;
+class PredicateBuilderHelper {
+
+  static Predicate getFirstPredicate(Map<String, String> params) {
+    Assert.notNull(params, "Parameter 'params' must not be null.");
+    Assert.notEmpty(params, "Parameter 'params' must not be empty.");
+
+    List<String> keys = new ArrayList<>(params.keySet());
+    String key = keys.get(0);
+    return Predicates.equal(key, params.get(key));
+  }
+
 }
+
+

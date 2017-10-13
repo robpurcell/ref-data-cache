@@ -14,19 +14,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-
 package com.robbyp.refdatacache.domain;
-
 
 import com.fluentinterface.builder.Builder;
 
 public interface InstrumentBuilder extends Builder<Instrument> {
   InstrumentBuilder withIsin(String isin);
+
   InstrumentBuilder withCusip(String cusip);
+
   InstrumentBuilder withSedol(String sedol);
+
   InstrumentBuilder withIssuer(String issuer);
+
   InstrumentBuilder withIssue(String issue);
+
   InstrumentBuilder withCountryOfIssue(String countryOfIssue);
+
   InstrumentBuilder withCountryOfIncorporation(String countryOfIncorporation);
 }

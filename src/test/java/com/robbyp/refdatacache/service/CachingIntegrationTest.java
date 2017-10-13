@@ -14,20 +14,35 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.robbyp.refdatacache.domain;
+package com.robbyp.refdatacache.service;
 
-import lombok.Data;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.query.Predicate;
+import com.hazelcast.query.Predicates;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-@Data
-public class Instrument implements Serializable {
-  private String id;
-  private String isin;
-  private String cusip;
-  private String sedol;
-  private String issuer;
-  private String issue;
-  private String countryOfIssue;
-  private String countryOfIncorporation;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
+
+public class CachingIntegrationTest {
+
+  private HazelcastInstance hazelcastInstance;
+
+  @Before
+  public void setUp() {
+    hazelcastInstance = Hazelcast.newHazelcastInstance();
+  }
+
+  @After
+  public void shutdown() {
+    Hazelcast.shutdownAll();
+  }
+
 }

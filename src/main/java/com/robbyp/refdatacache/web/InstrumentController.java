@@ -16,7 +16,6 @@
 // limitations under the License.
 package com.robbyp.refdatacache.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +27,12 @@ import com.robbyp.refdatacache.service.InstrumentService;
 @RequestMapping("instruments")
 public class InstrumentController {
 
-  @Autowired
-  private InstrumentService instrumentService;
+  private final InstrumentService instrumentService;
 
-  private ObjectMapper mapper = new ObjectMapper();
+  @Autowired
+  public InstrumentController(InstrumentService instrumentService) {
+    this.instrumentService = instrumentService;
+  }
 
   @GetMapping("/{id}")
   public String findById(@PathVariable String id) {
